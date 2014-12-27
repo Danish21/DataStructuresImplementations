@@ -19,6 +19,7 @@ int min(int a, int b){
 	return b;
 }
 
+
 int leftChildIndex(int parentIndex){
 	
 	return 2*parentIndex+1;
@@ -135,6 +136,7 @@ void heapInsert(heap * myHeap, int num){
 
 
 int heapRemoveMin(heap * myHeap){
+	
 	if(myHeap->size > 0){
 		int ret = myHeap->data[0]; //get root data
 		
@@ -143,9 +145,11 @@ int heapRemoveMin(heap * myHeap){
 		myHeap->size--; // decrease the size
 
 		heapifyDown(myHeap,0); //restore the heap structure
+
+		return ret;
 	}
 		
-
+	return 0;
 }
 
 void buildHeap(heap * myHeap, int * inputArray, int arraySize){ // transfrom an an array of inputs into a heap
@@ -174,23 +178,46 @@ void printHeap(heap * myHeap){ //print the heap array
 	printf("|\n");
 }
 
+int* heapSort(heap * myHeap){
 
+	int * outputArray = (int *) malloc( myHeap->size * sizeof(int));
+	int size = myHeap->size;
+	
+	for(int i=0; i<size; i++){
+		outputArray[i]=heapRemoveMin(myHeap);
+	}
+
+	return outputArray;
+}
 
 int main(){
 
 	heap * newHeap = (heap *) malloc(sizeof(heap));
 
 	heapInit(newHeap,1);
-
-	int arr[10];
-
-	for (int i = 0; i < 10; ++i)
-	{
-		arr[i]=i;
-	}
 	
-	buildHeap(newHeap, arr, 10);
+
+	heapInsert(newHeap,10);
+	heapInsert(newHeap,9);
+	heapInsert(newHeap,23);
+	heapInsert(newHeap,25);
+	heapInsert(newHeap,1);
+	heapInsert(newHeap,2);
+	heapInsert(newHeap,78);
+	heapInsert(newHeap,5);
+	
 	printHeap(newHeap);
+
+
+	int size = newHeap->size;
+	int * outputArray = heapSort(newHeap);
+	for(int i=0; i< size; i++){
+		printf("|%d",outputArray[i]);
+	}
+
+	printf("|\n");
+
+
 	////Do stuff
 
 	heapDestroy(newHeap);
