@@ -5,7 +5,7 @@
 #define arraySize 200
 
 
-int * merge(int * arr, int lo, int hi, int * sortedArr){
+int * merge(int * arr, int lo, int hi, int * tempArr){
 
 	int mid = (lo + hi)/2;
 
@@ -14,49 +14,50 @@ int * merge(int * arr, int lo, int hi, int * sortedArr){
 	int right=mid+1;
 
 	int curr = lo;
-	while(left <= mid && right <= hi){
 
-		if(arr[left]<arr[right]){
-			sortedArr[curr++] = arr[left++];
+	while(left <= mid && right <= hi){ //while within the bounds
+
+		if(arr[left]<arr[right]){ // if left is smaller copy over left val into temp array
+			tempArr[curr++] = arr[left++];
 		}else{
-			sortedArr[curr++] = arr[right++];
+			tempArr[curr++] = arr[right++]; //copy over right val right val into temp array
 		}
 
 	}
 
-	while(left<=mid){
-		sortedArr[curr++] = arr[left++];
+	while(left<=mid){ //copy over left half if it is left over
+		tempArr[curr++] = arr[left++];
 	}
 
-	while(right<=hi){
-		sortedArr[curr++] = arr[right++];
+	while(right<=hi){ //copy over right half if it is left over
+		tempArr[curr++] = arr[right++];
 	}
-	for(int i=lo; i<=hi; i++){
-		arr[i]= sortedArr[i]; 
+	
+	for(int i=lo; i<=hi; i++){ // copy from temp array to actual array
+		arr[i]= tempArr[i]; 
 	}
 }
 
-void mergeSort(int * arr, int lo, int hi, int* sortedArr){
+void mergeSort(int * arr, int lo, int hi, int* tempArr){
 
-	if(lo>=hi ){
+	if(lo>=hi ){//base case
 		return;
 	}
 
-	//printf("lo: %d hi: %d\n",lo,hi);
-	int mid = (lo + hi)/2;
+	int mid = (lo + hi)/2; //mid
 
-	mergeSort(arr,lo,mid,sortedArr);
-	mergeSort(arr,mid+1,hi,sortedArr);
+	mergeSort(arr,lo,mid,tempArr); //sort left half
+	mergeSort(arr,mid+1,hi,tempArr); //sort right half
 
-	merge(arr,lo,hi,sortedArr);
+	merge(arr,lo,hi,tempArr); //merge both halfs
 
 
 }
 
-void mergeSort(int * arr, int arrSize){
+void mergeSort(int * arr, int arrSize){ // wrapper for mergeSort
 	
-	int sortedArr[arrSize];
-	mergeSort(arr, 0, arrSize-1, sortedArr);
+	int tempArr[arrSize];
+	mergeSort(arr, 0, arrSize-1, tempArr);
 
 
 }
