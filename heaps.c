@@ -180,6 +180,7 @@ void printHeap(heap * myHeap){ //print the heap array
 
 int* heapSort(heap * myHeap){
 
+
 	int * outputArray = (int *) malloc( myHeap->size * sizeof(int));
 	int size = myHeap->size;
 	

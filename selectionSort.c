@@ -2,7 +2,7 @@
 #include <stdio.h>
 #define arraySize 10
 
-int swap(int * arr, int a, int b){ //swaps two indexs 
+void swap(int * arr, int a, int b){ //swaps two indexs 
 
 	int temp = arr[a];
 	arr[a] =arr[b];
@@ -23,7 +23,7 @@ int findMinIndex(int * arr, int start, int arrSize ){ //find the minimum index
 	return minIndex;
 
 }
-int selectionSort(int * arr, int arrSize){ //find the smallest put it at the beginning
+void selectionSort(int * arr, int arrSize){ //find the smallest put it at the beginning
 										   //find the second smallest number and put it 
 										   //at the second spot in the array and so on
 

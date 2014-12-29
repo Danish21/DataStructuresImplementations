@@ -4,14 +4,14 @@
 #define arraySize 200
 
 int swap(int * arr, int a, int b){
-	//printf("swapping %d and %d\n",a,b );
 	int temp = arr[a];
 	arr[a] = arr[b];
 	arr[b] = temp; 
 }
-int partition(int * arr, int lo, int hi){
 
-	int right=hi;
+int partition(int * arr, int lo, int hi){ 
+
+	int right=hi; 
 
 	int left=lo;
 
@@ -27,7 +27,7 @@ int partition(int * arr, int lo, int hi){
 			right--;
 		}
 
-		if(left<right){
+		if(left<right){ //only swap if valid
 			swap(arr,left, right);
 		}
 
